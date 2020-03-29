@@ -30,20 +30,21 @@ import model.controladores.TipologiaSexoControlador;
 
 public class PanelGestionDatosPersonales extends JPanel {
 	
-	private JTextField jtfNombre;
-	private JTextField jtfPrimerApellido;
-	private JTextField jtfSegundoApellido;
-	private JTextField jtfDni;
-	private JTextField jtfDireccion;
-	private JTextField jtfEmail;
-	private JTextField jtfTelefono;
-	private JComboBox<Tipologiasexo> jcbSexo;
+	 JTextField jtfNombre = new JTextField(20);
+	 JTextField jtfPrimerApellido = new JTextField(20);
+	 JTextField jtfSegundoApellido = new JTextField(20);
+	 JTextField jtfDni= new JTextField(10);
+	 JTextField jtfDireccion = new JTextField(40);
+	 JTextField jtfEmail = new JTextField(20);
+	 JTextField jtfTelefono = new JTextField(20);
+	 JComboBox<Tipologiasexo> jcbSexo = new JComboBox<Tipologiasexo>();
 	private JScrollPane scrollPaneImagen;
 	private byte[] imagen;
-	private JButton jbtCambiarImg;
+	 JButton jbtCambiarImg = new JButton("Elige imagen");
 	private JLabel jlblColorElegido;
-	private JTextField jtfColorElegido;
-	private JButton jbtElegirColor;
+	 JTextField jtfColorElegido = new JTextField(20);
+	private JButton jbtElegirColor = new JButton("Elige el color");
+	//JPanel jpPaneAColorear = new JPanel();
 	
 
 	public PanelGestionDatosPersonales() {
@@ -72,7 +73,7 @@ public class PanelGestionDatosPersonales extends JPanel {
 		c.anchor = GridBagConstraints.WEST;
 		panelGestion.add(jtfNombre, c);
 		
-		// añadimos los campos para primerApellid
+		// añadimos los campos para primerApellido
 		c.gridx = 0;
 		c.gridy = 2;
 		c.gridwidth = 1;
@@ -167,18 +168,22 @@ public class PanelGestionDatosPersonales extends JPanel {
 		panelGestion.add(jcbSexo, c);
 		
 		// añadimos los campos para Color
-		JButton jbtElegirColor = new JButton("Elegir color");
 		c.gridx = 0;
 		c.gridy = 8;
+		c.fill = GridBagConstraints.BOTH;
 		c.gridwidth = 1;
 		c.anchor = GridBagConstraints.EAST;
 		panelGestion.add(jbtElegirColor);
+		
 		
 		c.gridx = 1;
 		c.gridy = 8;
 		jtfColorElegido.setEnabled(true);
 		c.anchor = GridBagConstraints.WEST;
 		panelGestion.add(jtfColorElegido, c);
+//		panelGestion.add(this.jpPaneAColorear, c);
+//		panelGestion.setBackground(color);
+		
 		
 		jbtElegirColor.addActionListener(new ActionListener() {
 			
@@ -200,11 +205,14 @@ public class PanelGestionDatosPersonales extends JPanel {
 
 
 	public void limpiarPantalla() {
-		this.setNombre("");
+		this.jtfNombre.setText("");
 		this.jtfPrimerApellido.setText("");
 		this.jtfSegundoApellido.setText("");
 		this.jtfDni.setText("");
 		this.jtfDireccion.setText("");
+		this.jtfTelefono.setText("");
+		this.jtfEmail.setText("");
+		this.jcbSexo.setSelectedIndex(0);
 		
 	}
 	
@@ -279,6 +287,7 @@ public class PanelGestionDatosPersonales extends JPanel {
 		try {
 			this.setBackground(Color.decode(colorElegido));
 		} catch (Exception e) {
+			System.out.println("No cambio");
 			this.setBackground(Color.GRAY);
 		}
 	}
@@ -290,6 +299,9 @@ public class PanelGestionDatosPersonales extends JPanel {
 			String strColor = "#"+Integer.toHexString(color.getRGB()).substring(2);
 			this.jtfColorElegido.setText(strColor);
 			this.setColorElegido(strColor);
+//			this.jpPaneAColorear.setBackground(color);
+			this.setBackground(color);
+	
 		}
 	}
 	

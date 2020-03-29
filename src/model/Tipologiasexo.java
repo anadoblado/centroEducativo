@@ -91,4 +91,20 @@ public class Tipologiasexo extends Entidad implements Serializable {
 		return profesor;
 	}
 
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return descripcion;
+	}
+	
+	public boolean equals(Object obj) {
+		Tipologiasexo f = (Tipologiasexo) obj;
+		if (this.id == f.id) {
+			return true;
+		} 
+		
+		return false;
+		
+	}
+
 }
