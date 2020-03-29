@@ -28,9 +28,17 @@ public class Profesor extends Entidad implements Serializable {
 
 	private String email;
 
+	@Lob
+	private byte[] imagen;
+
 	private String nombre;
 
 	private String telefono;
+
+	//bi-directional many-to-one association to Tipologiasexo
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="idTipologiaSexo")
+	private Tipologiasexo tipologiasexo;
 
 	//bi-directional many-to-one association to Valoracionmateria
 	@OneToMany(mappedBy="profesor")
@@ -87,6 +95,14 @@ public class Profesor extends Entidad implements Serializable {
 		this.email = email;
 	}
 
+	public byte[] getImagen() {
+		return this.imagen;
+	}
+
+	public void setImagen(byte[] imagen) {
+		this.imagen = imagen;
+	}
+
 	public String getNombre() {
 		return this.nombre;
 	}
@@ -101,6 +117,14 @@ public class Profesor extends Entidad implements Serializable {
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}
+
+	public Tipologiasexo getTipologiasexo() {
+		return this.tipologiasexo;
+	}
+
+	public void setTipologiasexo(Tipologiasexo tipologiasexo) {
+		this.tipologiasexo = tipologiasexo;
 	}
 
 	public List<Valoracionmateria> getValoracionmaterias() {

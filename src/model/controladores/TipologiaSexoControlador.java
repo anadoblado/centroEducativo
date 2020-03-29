@@ -2,6 +2,7 @@ package model.controladores;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -9,6 +10,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import model.Controlador;
+import model.Tipologiasexo;
 
 
 
@@ -21,7 +23,7 @@ public class TipologiaSexoControlador extends Controlador {
 	 * 
 	 */
 	public TipologiaSexoControlador() {
-		super(TipologiaSexo.class, "EvaluacionCentroEducativo");
+		super(Tipologiasexo.class, "EvaluacionCentroEducativo");
 	}
 
 	/**
@@ -40,12 +42,12 @@ public class TipologiaSexoControlador extends Controlador {
 	 * 
 	 * @return
 	 */
-	public List<TipologiaSexo> findAllTipologiasSexo () {
-		List<TipologiaSexo> entities = new ArrayList<TipologiaSexo>();
+	public List<Tipologiasexo> findAllTipologiasSexo () {
+		List<Tipologiasexo> entities = new ArrayList<Tipologiasexo>();
 		EntityManager em = getEntityManagerFactory().createEntityManager();
 		try {			
-			Query q = em.createNativeQuery("SELECT * FROM tipologiasexo", TipologiaSexo.class);
-			entities = (List<TipologiaSexo>) q.getResultList();
+			Query q = em.createNativeQuery("SELECT * FROM tipologiasexo", Tipologiasexo.class);
+			entities = (List<Tipologiasexo>) q.getResultList();
 		}
 		catch (NoResultException nrEx) {
 		}

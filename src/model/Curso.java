@@ -67,6 +67,7 @@ public class Curso extends Entidad implements Serializable {
 
 	@Override
 	public String toString() {
+		// TODO Auto-generated method stub
 		return descripcion;
 	}
 	
@@ -79,5 +80,7 @@ public class Curso extends Entidad implements Serializable {
 		return false;
 		
 	}
+	
+	
 
 }
