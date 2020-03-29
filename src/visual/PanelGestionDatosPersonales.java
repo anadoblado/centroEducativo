@@ -1,12 +1,18 @@
 package visual;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,8 +26,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import model.Tipologiasexo;
+import model.controladores.TipologiaSexoControlador;
 
 public class PanelGestionDatosPersonales extends JPanel {
+	
 	private JTextField jtfNombre;
 	private JTextField jtfPrimerApellido;
 	private JTextField jtfSegundoApellido;
@@ -35,14 +43,162 @@ public class PanelGestionDatosPersonales extends JPanel {
 	private JButton jbtCambiarImg;
 	private JLabel jlblColorElegido;
 	private JTextField jtfColorElegido;
-	private JButton jbtElegircolor;
+	private JButton jbtElegirColor;
 	
 
 	public PanelGestionDatosPersonales() {
-		// TODO Auto-generated constructor stub
+		this.setLayout(new BorderLayout());
+		this.add(getPanelGestion(), BorderLayout.CENTER);
 	}
 
 	
+	private JPanel getPanelGestion() {
+		JPanel panelGestion = new JPanel();
+		panelGestion.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		
+		// añadimos los campos para nombre
+		c.fill = GridBagConstraints.NONE;
+		c.gridx = 0;
+		c.gridy = 1;
+		c.gridwidth = 1;
+		c.anchor = GridBagConstraints.EAST;
+		c.insets = new Insets(2, 2, 2, 2);
+		panelGestion.add(new JLabel("Nombre: "), c);
+		
+		c.gridx = 1;
+		c.gridy = 1;
+		jtfNombre.setEnabled(true);
+		c.anchor = GridBagConstraints.WEST;
+		panelGestion.add(jtfNombre, c);
+		
+		// añadimos los campos para primerApellid
+		c.gridx = 0;
+		c.gridy = 2;
+		c.gridwidth = 1;
+		c.anchor = GridBagConstraints.EAST;
+		panelGestion.add(new JLabel("Primer Apellido: "), c);
+		
+		c.gridx = 1;
+		c.gridy = 2;
+		jtfPrimerApellido.setEnabled(true);
+		c.anchor = GridBagConstraints.WEST;
+		panelGestion.add(jtfPrimerApellido, c);
+		
+		// añadimos los campos para segundoApellido
+		c.gridx = 0;
+		c.gridy = 3;
+		c.gridwidth = 1;
+		c.anchor = GridBagConstraints.EAST;
+		panelGestion.add(new JLabel("Segundo Apellido: "), c);
+		
+		c.gridx = 1;
+		c.gridy = 3;
+		jtfSegundoApellido.setEnabled(true);
+		c.anchor = GridBagConstraints.WEST;
+		panelGestion.add(jtfSegundoApellido, c);
+
+		// añadimos los campos para Dni
+		c.gridx = 0;
+		c.gridy = 4;
+		c.gridwidth = 1;
+		c.anchor = GridBagConstraints.EAST;
+		panelGestion.add(new JLabel("Dni: "), c);
+		
+		c.gridx = 1;
+		c.gridy = 4;
+		jtfDni.setEnabled(true);
+		c.anchor = GridBagConstraints.WEST;
+		panelGestion.add(jtfDni, c);
+		
+		// añadimos los campos para Dirección
+		c.gridx = 0;
+		c.gridy = 5;
+		c.gridwidth = 1;
+		c.anchor = GridBagConstraints.EAST;
+		panelGestion.add(new JLabel("Dirección: "), c);
+		
+		c.gridx = 1;
+		c.gridy = 5;
+		jtfDireccion.setEnabled(true);
+		c.anchor = GridBagConstraints.WEST;
+		panelGestion.add(jtfDireccion, c);
+		
+		// añadimos los campos para Teléfono
+		c.gridx = 0;
+		c.gridy = 6;
+		c.gridwidth = 1;
+		c.anchor = GridBagConstraints.EAST;
+		panelGestion.add(new JLabel("Teléfono: "), c);
+		
+		c.gridx = 1;
+		c.gridy = 6;
+		jtfTelefono.setEnabled(true);
+		c.anchor = GridBagConstraints.WEST;
+		panelGestion.add(jtfTelefono, c);
+
+		// añadimos los campos para Email
+		c.gridx = 0;
+		c.gridy = 6;
+		c.gridwidth = 1;
+		c.anchor = GridBagConstraints.EAST;
+		panelGestion.add(new JLabel("Email: "), c);
+		
+		c.gridx = 1;
+		c.gridy = 6;
+		jtfEmail.setEnabled(true);
+		c.anchor = GridBagConstraints.WEST;
+		panelGestion.add(jtfEmail, c);
+		
+		// incluimos JComboBox para el Sexo
+		List<Tipologiasexo> tipo = TipologiaSexoControlador.getInstancia().findAllTipologiasSexo();
+		for (Tipologiasexo ti : tipo) {
+			jcbSexo.addItem(ti);
+		}
+		c.gridx = 0;
+		c.gridy = 7;
+		c.gridwidth = 1;
+		c.anchor = GridBagConstraints.EAST;
+		panelGestion.add(new JLabel("Sexo: "), c);
+		
+		c.gridx = 1;
+		c.gridy = 7;
+		c.anchor = GridBagConstraints.WEST;
+		panelGestion.add(jcbSexo, c);
+		
+		// añadimos los campos para Color
+		JButton jbtElegirColor = new JButton("Elegir color");
+		c.gridx = 0;
+		c.gridy = 8;
+		c.gridwidth = 1;
+		c.anchor = GridBagConstraints.EAST;
+		panelGestion.add(jbtElegirColor);
+		
+		c.gridx = 1;
+		c.gridy = 8;
+		jtfColorElegido.setEnabled(true);
+		c.anchor = GridBagConstraints.WEST;
+		panelGestion.add(jtfColorElegido, c);
+		
+		jbtElegirColor.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				seleccionarColor();
+				
+			}
+		});
+
+
+
+
+
+		
+		
+		return panelGestion;
+	}
+
+
 	public void limpiarPantalla() {
 		this.setNombre("");
 		this.jtfPrimerApellido.setText("");
@@ -216,28 +372,35 @@ public class PanelGestionDatosPersonales extends JPanel {
 					super.mouseWheelMoved(e);
 				}
 				
+				private void mostrarMenu(MouseEvent e) {
+					if(e.isPopupTrigger()) {
+						JPopupMenu menu = new JPopupMenu();
+						menu.add(new JMenuItem(icono.getIconWidth() + "x" + icono.getIconHeight() + "pixeles"));
+						menu.addSeparator();
+						JMenuItem miImagenSeleccionada = new JMenuItem("Seleccionar una imagen");
+						miImagenSeleccionada.addActionListener(new ActionListener() {
+							
+							@Override
+							public void actionPerformed(ActionEvent e) {
+//								seleccionarImagen();
+								
+							}
+						});
+						menu.add(miImagenSeleccionada);
+						menu.show(e.getComponent(), e.getX(), e.getY());
+					}
+				}
+				
 			});
+			this.scrollPaneImagen.setViewportView(jlblIcono);
+		}
+		else {
+			JLabel jlblIcono = new JLabel("No hay imagen");
+			this.scrollPaneImagen.setViewportView(jlblIcono);
 		}
 	}
 	
-//	private void mostrarMenu(MouseEvent e) {
-//		if(e.isPopupTrigger()) {
-//			JPopupMenu menu = new JPopupMenu();
-//			menu.add(new JMenuItem(icono.getIconWidth() + "x" + icono.getIconeHeight() + "pixeles"));
-//			menu.addSeparator();
-//			JMenuItem miImagenSeleccionada = new JMenuItem("Seleccionar una imagen");
-//			miImagenSeleccionada.addActionListener(new ActionListener() {
-//				
-//				@Override
-//				public void actionPerformed(ActionEvent e) {
-//					seleccionarImagen();
-//					
-//				}
-//			});
-//			menu.add(miImagenSeleccionada);
-//			menu.show(e.getComponent(), e.getX(), e.getY());
-//		}
-//	}
+
 	
 	public PanelGestionDatosPersonales(LayoutManager arg0) {
 		super(arg0);
