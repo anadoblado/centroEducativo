@@ -15,7 +15,11 @@ public class ToolBar extends JToolBar {
 	
 
 	public ToolBar() {
-		this.add(crearBoton(0, "", "ruedadentada.png", "Ir a "));
+		this.add(crearBoton(0, "", "ruedadentada.png", "Ir a Gestión del Curso"));
+		this.add(crearBoton(1, "", "ruedadentada.png", "Ir a Gestión del Estudiante"));
+		this.add(crearBoton(2, "", "ruedadentada.png", "Ir a Gestión del Materia"));
+		this.add(crearBoton(3, "", "ruedadentada.png", "Ir a Gestión del Profesor"));
+		this.add(crearBoton(4, "", "ruedadentada.png", "Ir a Gestión del Valoración de la Materia"));
 		
 	}
 
@@ -44,21 +48,5 @@ public class ToolBar extends JToolBar {
 		return jbt;
 	}
 	
-	
-
-	public ToolBar(int arg0) {
-		super(arg0);
-		// TODO Auto-generated constructor stub
-	}
-
-	public ToolBar(String arg0) {
-		super(arg0);
-		// TODO Auto-generated constructor stub
-	}
-
-	public ToolBar(String arg0, int arg1) {
-		super(arg0, arg1);
-		// TODO Auto-generated constructor stub
-	}
 
 }

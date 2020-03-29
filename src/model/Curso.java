@@ -65,4 +65,19 @@ public class Curso extends Entidad implements Serializable {
 		return materia;
 	}
 
+	@Override
+	public String toString() {
+		return descripcion;
+	}
+	
+	public boolean equals(Object obj) {
+		Curso f = (Curso) obj;
+		if (this.id == f.id) {
+			return true;
+		} 
+		
+		return false;
+		
+	}
+
 }
