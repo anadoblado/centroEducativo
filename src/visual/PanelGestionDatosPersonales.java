@@ -18,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
@@ -30,7 +31,7 @@ import model.controladores.TipologiaSexoControlador;
 
 public class PanelGestionDatosPersonales extends JPanel {
 	
-	 public JTextField jtfId = new JTextField(10);
+	 JTextField jtfId = new JTextField(10);
 	 JTextField jtfNombre = new JTextField(20);
 	 JTextField jtfPrimerApellido = new JTextField(20);
 	 JTextField jtfSegundoApellido = new JTextField(20);
@@ -40,12 +41,13 @@ public class PanelGestionDatosPersonales extends JPanel {
 	 JTextField jtfTelefono = new JTextField(20);
 	 JComboBox<Tipologiasexo> jcbSexo = new JComboBox<Tipologiasexo>();
 	 JScrollPane scrollPaneImagen;
-	// byte[] imagen;
+	 byte[] imagen;
 	 JButton jbtCambiarImg = new JButton("Elige imagen");
 	 JLabel jlblColorElegido = new JLabel();
 	 JTextField jtfColorElegido = new JTextField(20);
 	 JButton jbtElegirColor = new JButton("Elige el color");
-	//JPanel jpPaneAColorear = new JPanel();
+	 JFileChooser jfileChooser = new JFileChooser();
+	 
 	
 
 	public PanelGestionDatosPersonales() {
@@ -230,6 +232,8 @@ public class PanelGestionDatosPersonales extends JPanel {
 		this.jtfTelefono.setText("");
 		this.jtfEmail.setText("");
 		this.jcbSexo.setSelectedIndex(0);
+		this.jtfColorElegido.setText("");
+		this.setBackground(Color.gray);
 		
 	}
 	
@@ -312,7 +316,6 @@ public class PanelGestionDatosPersonales extends JPanel {
 		try {
 			this.setBackground(Color.decode(colorElegido));
 		} catch (Exception e) {
-			System.out.println("No cambio");
 			this.setBackground(Color.GRAY);
 		}
 	}
@@ -324,10 +327,16 @@ public class PanelGestionDatosPersonales extends JPanel {
 			String strColor = "#"+Integer.toHexString(color.getRGB()).substring(2);
 			this.jtfColorElegido.setText(strColor);
 			this.setColorElegido(strColor);
-//			this.jpPaneAColorear.setBackground(color);
 			this.setBackground(color);
 	
 		}
+	}
+	
+	public void seleccionarImagen() {
+		this.jfileChooser = new JFileChooser();
+		
+		//this.jfileChooser.setCurrentDirectory(new File("C:\\"));
+		//this.jfileChooser.setfi
 	}
 	
 	public Tipologiasexo getTipologiaSexo() {
@@ -349,7 +358,93 @@ public class PanelGestionDatosPersonales extends JPanel {
 	}
 	
 	
+	public byte[] getImagen() {
+		return imagen;
+	}
 	
+	public void setImagen(byte[] iagen) {
+		this.imagen = imagen;
+		if(imagen != null && imagen.length > 0) {
+			ImageIcon icono = new ImageIcon(this.imagen);
+			JLabel jlblIcono = new JLabel(icono);
+			jlblIcono.addMouseListener(new MouseAdapter() {
+
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					// TODO Auto-generated method stub
+					super.mouseClicked(e);
+				}
+
+				@Override
+				public void mouseDragged(MouseEvent e) {
+					// TODO Auto-generated method stub
+					super.mouseDragged(e);
+				}
+
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					// TODO Auto-generated method stub
+					super.mouseEntered(e);
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
+					// TODO Auto-generated method stub
+					super.mouseExited(e);
+				}
+
+				@Override
+				public void mouseMoved(MouseEvent e) {
+					// TODO Auto-generated method stub
+					super.mouseMoved(e);
+				}
+
+				@Override
+				public void mousePressed(MouseEvent e) {
+					// TODO Auto-generated method stub
+					super.mousePressed(e);
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					// TODO Auto-generated method stub
+					super.mouseReleased(e);
+				}
+
+				@Override
+				public void mouseWheelMoved(MouseWheelEvent e) {
+					// TODO Auto-generated method stub
+					super.mouseWheelMoved(e);
+				}
+				
+				private void mostrarMenu(MouseEvent e) {
+					if(e.isPopupTrigger()) {
+						JPopupMenu menu = new JPopupMenu();
+						menu.add(new JMenuItem(icono.getIconWidth() + "x" + icono.getIconHeight() + "pixeles"));
+						menu.addSeparator();
+						JMenuItem miImagenSeleccionada = new JMenuItem("Seleccionar una imagen");
+						miImagenSeleccionada.addActionListener(new ActionListener() {
+							
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								seleccionarImagen();
+								
+							}
+						});
+						menu.add(miImagenSeleccionada);
+						menu.show(e.getComponent(), e.getX(), e.getY());
+					}
+				}
+				
+			});
+			this.scrollPaneImagen.setViewportView(jlblIcono);
+		}
+		else {
+			JLabel jlblIcono = new JLabel("No hay imagen");
+			this.scrollPaneImagen.setViewportView(jlblIcono);
+		}
+	}
+
 	
 	
 

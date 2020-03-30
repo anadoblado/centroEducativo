@@ -147,8 +147,6 @@ public class PanelGestionEstudiante extends JPanel {
 		this.actual.setEmail(this.panelDatos.getEmail());
 		this.actual.setTipologiasexo(this.panelDatos.getTipologiaSexo());
 		this.actual.setColor(this.panelDatos.getColorElegido());
-//		this.actual.setId(Integer.parseInt(this.panelDatos.getId()));
-		
 		
 		if (actual.getId() == 0) {
 			EstudianteControlador.getInstancia().persist(actual);
@@ -158,7 +156,6 @@ public class PanelGestionEstudiante extends JPanel {
 			EstudianteControlador.getInstancia().merge(actual);
 			
 		}
-		//this.panelDatos.jtfId.setText("" + this.panelDatos.getId());
 		JOptionPane.showMessageDialog(this, "Guardado correctamente");
 	}
 
