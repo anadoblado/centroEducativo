@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Curso.findAll", query="SELECT c FROM Curso c")
-public class Curso extends Entidad implements Serializable {
+public class Curso implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -64,23 +64,5 @@ public class Curso extends Entidad implements Serializable {
 
 		return materia;
 	}
-
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return descripcion;
-	}
-	
-	public boolean equals(Object obj) {
-		Curso f = (Curso) obj;
-		if (this.id == f.id) {
-			return true;
-		} 
-		
-		return false;
-		
-	}
-	
-	
 
 }

@@ -30,6 +30,7 @@ import model.controladores.TipologiaSexoControlador;
 
 public class PanelGestionDatosPersonales extends JPanel {
 	
+	 JTextField jtfId = new JTextField(10);
 	 JTextField jtfNombre = new JTextField(20);
 	 JTextField jtfPrimerApellido = new JTextField(20);
 	 JTextField jtfSegundoApellido = new JTextField(20);
@@ -48,15 +49,24 @@ public class PanelGestionDatosPersonales extends JPanel {
 	
 
 	public PanelGestionDatosPersonales() {
-		this.setLayout(new BorderLayout());
-		this.add(getPanelGestion(), BorderLayout.CENTER);
-	}
-
-	
-	private JPanel getPanelGestion() {
-		JPanel panelGestion = new JPanel();
-		panelGestion.setLayout(new GridBagLayout());
+		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
+		
+
+		// añadimos los campos para nombre
+		c.fill = GridBagConstraints.NONE;
+		c.gridx = 0;
+		c.gridy = 0;
+		c.gridwidth = 1;
+		c.anchor = GridBagConstraints.EAST;
+		c.insets = new Insets(2, 2, 2, 2);
+		this.add(new JLabel("Id: "), c);
+		
+		c.gridx = 1;
+		c.gridy = 0;
+		jtfId.setEnabled(false);
+		c.anchor = GridBagConstraints.WEST;
+		this.add(jtfId, c);
 		
 		// añadimos los campos para nombre
 		c.fill = GridBagConstraints.NONE;
@@ -65,91 +75,93 @@ public class PanelGestionDatosPersonales extends JPanel {
 		c.gridwidth = 1;
 		c.anchor = GridBagConstraints.EAST;
 		c.insets = new Insets(2, 2, 2, 2);
-		panelGestion.add(new JLabel("Nombre: "), c);
+		this.add(new JLabel("Nombre: "), c);
 		
 		c.gridx = 1;
 		c.gridy = 1;
 		jtfNombre.setEnabled(true);
 		c.anchor = GridBagConstraints.WEST;
-		panelGestion.add(jtfNombre, c);
+		this.add(jtfNombre, c);
 		
 		// añadimos los campos para primerApellido
 		c.gridx = 0;
 		c.gridy = 2;
 		c.gridwidth = 1;
 		c.anchor = GridBagConstraints.EAST;
-		panelGestion.add(new JLabel("Primer Apellido: "), c);
+		this.add(new JLabel("Primer Apellido: "), c);
 		
 		c.gridx = 1;
 		c.gridy = 2;
 		jtfPrimerApellido.setEnabled(true);
 		c.anchor = GridBagConstraints.WEST;
-		panelGestion.add(jtfPrimerApellido, c);
+		this.add(jtfPrimerApellido, c);
 		
 		// añadimos los campos para segundoApellido
 		c.gridx = 0;
 		c.gridy = 3;
 		c.gridwidth = 1;
 		c.anchor = GridBagConstraints.EAST;
-		panelGestion.add(new JLabel("Segundo Apellido: "), c);
+		this.add(new JLabel("Segundo Apellido: "), c);
 		
 		c.gridx = 1;
 		c.gridy = 3;
 		jtfSegundoApellido.setEnabled(true);
 		c.anchor = GridBagConstraints.WEST;
-		panelGestion.add(jtfSegundoApellido, c);
+		this.add(jtfSegundoApellido, c);
 
 		// añadimos los campos para Dni
 		c.gridx = 0;
 		c.gridy = 4;
 		c.gridwidth = 1;
 		c.anchor = GridBagConstraints.EAST;
-		panelGestion.add(new JLabel("Dni: "), c);
+		this.add(new JLabel("Dni: "), c);
 		
 		c.gridx = 1;
 		c.gridy = 4;
 		jtfDni.setEnabled(true);
 		c.anchor = GridBagConstraints.WEST;
-		panelGestion.add(jtfDni, c);
+		this.add(jtfDni, c);
 		
 		// añadimos los campos para Dirección
 		c.gridx = 0;
 		c.gridy = 5;
 		c.gridwidth = 1;
 		c.anchor = GridBagConstraints.EAST;
-		panelGestion.add(new JLabel("Dirección: "), c);
+		this.add(new JLabel("Dirección: "), c);
 		
 		c.gridx = 1;
 		c.gridy = 5;
+		c.gridwidth = 2;
 		jtfDireccion.setEnabled(true);
 		c.anchor = GridBagConstraints.WEST;
-		panelGestion.add(jtfDireccion, c);
+		this.add(jtfDireccion, c);
 		
 		// añadimos los campos para Teléfono
+		c.gridwidth = 1;
 		c.gridx = 0;
 		c.gridy = 6;
 		c.gridwidth = 1;
 		c.anchor = GridBagConstraints.EAST;
-		panelGestion.add(new JLabel("Teléfono: "), c);
+		this.add(new JLabel("Teléfono: "), c);
 		
 		c.gridx = 1;
 		c.gridy = 6;
 		jtfTelefono.setEnabled(true);
 		c.anchor = GridBagConstraints.WEST;
-		panelGestion.add(jtfTelefono, c);
+		this.add(jtfTelefono, c);
 
 		// añadimos los campos para Email
 		c.gridx = 0;
 		c.gridy = 7;
 		c.gridwidth = 1;
 		c.anchor = GridBagConstraints.EAST;
-		panelGestion.add(new JLabel("Email: "), c);
+		this.add(new JLabel("Email: "), c);
 		
 		c.gridx = 1;
 		c.gridy = 7;
 		jtfEmail.setEnabled(true);
 		c.anchor = GridBagConstraints.WEST;
-		panelGestion.add(jtfEmail, c);
+		this.add(jtfEmail, c);
 		
 		// incluimos JComboBox para el Sexo
 		List<Tipologiasexo> tipo = TipologiaSexoControlador.getInstancia().findAllTipologiasSexo();
@@ -160,19 +172,19 @@ public class PanelGestionDatosPersonales extends JPanel {
 		c.gridy = 8;
 		c.gridwidth = 1;
 		c.anchor = GridBagConstraints.EAST;
-		panelGestion.add(new JLabel("Sexo: "), c);
+		this.add(new JLabel("Sexo: "), c);
 		
 		c.gridx = 1;
 		c.gridy = 8;
 		c.anchor = GridBagConstraints.WEST;
-		panelGestion.add(jcbSexo, c);
+		this.add(jcbSexo, c);
 		
 		// añadimos los campos para Color
 		c.gridx = 0;
 		c.gridy = 9;
 		c.gridwidth = 1;
 		c.anchor = GridBagConstraints.EAST;
-		panelGestion.add( new JLabel("Color: "), c);
+		this.add( new JLabel("Color: "), c);
 		
 		
 		
@@ -180,14 +192,14 @@ public class PanelGestionDatosPersonales extends JPanel {
 		c.gridy = 9;
 		jtfColorElegido.setEnabled(true);
 		c.anchor = GridBagConstraints.WEST;
-		panelGestion.add(jtfColorElegido, c);
+		this.add(jtfColorElegido, c);
 //		panelGestion.add(this.jpPaneAColorear, c);
 //		panelGestion.setBackground(color);
 		
-		c.gridx = 0;
-		c.gridy = 10;
+		c.gridx = 2;
+		c.gridy = 9;
 		c.anchor = GridBagConstraints.WEST;
-		panelGestion.add(jbtElegirColor, c);
+		this.add(jbtElegirColor, c);
 		
 		
 		jbtElegirColor.addActionListener(new ActionListener() {
@@ -205,11 +217,11 @@ public class PanelGestionDatosPersonales extends JPanel {
 
 		
 		
-		return panelGestion;
 	}
 
-
+	
 	public void limpiarPantalla() {
+		this.jtfId.setText("");
 		this.jtfNombre.setText("");
 		this.jtfPrimerApellido.setText("");
 		this.jtfSegundoApellido.setText("");
@@ -219,6 +231,14 @@ public class PanelGestionDatosPersonales extends JPanel {
 		this.jtfEmail.setText("");
 		this.jcbSexo.setSelectedIndex(0);
 		
+	}
+	
+	public String getId() {
+		return jtfId.getText();
+	}
+	
+	public void setId(String id) {
+		this.jtfId.setText(id);
 	}
 	
 	public String getNombre() {

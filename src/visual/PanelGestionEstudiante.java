@@ -146,7 +146,6 @@ public class PanelGestionEstudiante extends JPanel {
 		this.actual.setTelefono(this.panelDatos.getTelefono());
 		this.actual.setEmail(this.panelDatos.getEmail());
 		this.actual.setTipologiasexo(this.panelDatos.getTipologiaSexo());
-		this.actual.set
 	}
 
 	/**
@@ -154,6 +153,7 @@ public class PanelGestionEstudiante extends JPanel {
 	 */
 	private void cargarDatosAcual() {
 		if(this.actual != null) {
+			panelDatos.setId(String.valueOf(this.actual.getId()));
 			panelDatos.setNombre(this.actual.getNombre());
 			panelDatos.setPrimerApellido(this.actual.getApellido1());
 			panelDatos.setSegundoApellido(this.actual.getApellido2());
