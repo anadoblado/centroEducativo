@@ -87,4 +87,21 @@ public class Materia extends Entidad implements Serializable {
 		return valoracionmateria;
 	}
 
+	@Override
+	public String toString() {
+		return nombre;
+	}
+	
+	public boolean equals(Object obj) {
+		Materia f = (Materia) obj;
+		if (this.id == f.id) {
+			return true;
+		} 
+		
+		return false;
+		
+	}
+	
+	
+
 }

@@ -3,6 +3,7 @@ package visual;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -12,6 +13,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -21,13 +27,16 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileFilter;
 
 import model.Tipologiasexo;
 import model.controladores.TipologiaSexoControlador;
+import utils.CacheImagenes;
 
 public class PanelGestionDatosPersonales extends JPanel {
 	
@@ -40,13 +49,19 @@ public class PanelGestionDatosPersonales extends JPanel {
 	 JTextField jtfEmail = new JTextField(20);
 	 JTextField jtfTelefono = new JTextField(20);
 	 JComboBox<Tipologiasexo> jcbSexo = new JComboBox<Tipologiasexo>();
-	 JScrollPane scrollPaneImagen;
+	 JScrollPane jsp = new JScrollPane(new JLabel());
 	 byte[] imagen;
 	 JButton jbtCambiarImg = new JButton("Elige imagen");
 	 JLabel jlblColorElegido = new JLabel();
 	 JTextField jtfColorElegido = new JTextField(20);
 	 JButton jbtElegirColor = new JButton("Elige el color");
-	 JFileChooser jfileChooser = new JFileChooser();
+	 JFileChooser jfileChooser;
+	 
+	public JScrollPane creaScrollPane(String nombreIcono) {
+			JLabel jlb = new JLabel(CacheImagenes.getCacheImagenes().getIcono(nombreIcono));
+			JScrollPane scrollPaneImagen = new JScrollPane(jlb);
+			return scrollPaneImagen;
+		}
 	 
 	
 
@@ -202,9 +217,7 @@ public class PanelGestionDatosPersonales extends JPanel {
 		c.gridy = 9;
 		c.anchor = GridBagConstraints.WEST;
 		this.add(jbtElegirColor, c);
-		
-		
-		jbtElegirColor.addActionListener(new ActionListener() {
+        jbtElegirColor.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -212,13 +225,38 @@ public class PanelGestionDatosPersonales extends JPanel {
 				
 			}
 		});
-
-
-
-
-
 		
 		
+		//GridBagConstraints d = new GridBagConstraints();
+		c.weightx = 2;
+		c.gridheight = 4;
+		c.gridx = 2;
+		c.gridy = 1;
+		c.gridwidth =2;
+		c.fill = GridBagConstraints.BOTH;
+		//c.insets = new Insets(0,0,5,5);
+		jsp.setPreferredSize(new Dimension(100, 100));
+		this.add(jsp, c);
+		
+		c.weightx = 1;
+		c.gridheight = 1;
+		c.gridx = 2;
+		c.gridy = 6;
+		c.anchor = GridBagConstraints.WEST;
+		this.add(jbtCambiarImg, c);
+		jbtCambiarImg.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					seleccionarImagen(imagen);
+				} catch (IOException e2) {
+					e2.printStackTrace();
+				}
+				
+			}
+		});
+				
 	}
 
 	
@@ -332,11 +370,79 @@ public class PanelGestionDatosPersonales extends JPanel {
 		}
 	}
 	
-	public void seleccionarImagen() {
+	
+	
+	public byte[] seleccionarImagen(byte[] imagen) throws IOException {
 		this.jfileChooser = new JFileChooser();
+		byte[] imagenSeleccionada = null;
 		
-		//this.jfileChooser.setCurrentDirectory(new File("C:\\"));
-		//this.jfileChooser.setfi
+		this.jfileChooser.setCurrentDirectory(new File("C:\\"));
+		this.jfileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		
+		this.jfileChooser.setFileFilter(new FileFilter() {
+
+			@Override
+			public String getDescription() {
+				
+				return "Archivos para elegir *.jpg *.png *.gif";
+			}
+			
+			@Override
+			public boolean accept(File f) {
+				if (f.isDirectory() || f.isFile() && f.getAbsolutePath().endsWith(".jpg")
+						|| f.getAbsolutePath().endsWith(".jpeg")
+						|| f.getAbsolutePath().endsWith(".png")
+						|| f.getAbsolutePath().endsWith(".gif")) 
+					return true;
+				return false;
+			}
+
+			
+			});
+		int seleccionUsuario = jfileChooser.showOpenDialog(null);
+		
+		if (seleccionUsuario == JFileChooser.APPROVE_OPTION) {
+			File fichero = this.jfileChooser.getSelectedFile();
+			
+			// Vuelco el nombre del fichero sobre el JTextField
+			//this.jtfNombre.setText(fichero.getAbsolutePath());
+			
+			if (fichero.isFile()) {
+				try {
+					
+					imagenSeleccionada = Files.readAllBytes(fichero.toPath());
+					ImageIcon imagenProvisional = new ImageIcon(imagenSeleccionada);
+					if(imagenProvisional.getIconWidth() > 800 || imagenProvisional.getIconHeight() > 800) {
+						JOptionPane.showMessageDialog(null, "La imagen es demasiado grande");
+						return imagen;
+					}
+						
+					setImagen(imagenSeleccionada);
+					return imagenSeleccionada;
+					
+//					FileReader fileReader = new FileReader(fichero);
+//					BufferedReader bufferedReader = new BufferedReader(fileReader);
+//			
+//					StringBuffer sb = new StringBuffer();
+//					String lineaDelFichero;
+//			
+//					// Lectura del fichero línea a línea
+//					while ((lineaDelFichero = bufferedReader.readLine()) != null) {
+//						sb.append(lineaDelFichero + "\n");
+//					}
+//					
+//					// Volcamos el contenido del fichero al JTextArea
+//					this.jtaContenidoFichero.setText(sb.toString());
+				}
+				catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+		imagenSeleccionada = imagen;
+		return imagen;
+		
+
 	}
 	
 	public Tipologiasexo getTipologiaSexo() {
@@ -362,7 +468,7 @@ public class PanelGestionDatosPersonales extends JPanel {
 		return imagen;
 	}
 	
-	public void setImagen(byte[] iagen) {
+	public void setImagen(byte[] imagen) {
 		this.imagen = imagen;
 		if(imagen != null && imagen.length > 0) {
 			ImageIcon icono = new ImageIcon(this.imagen);
@@ -427,7 +533,12 @@ public class PanelGestionDatosPersonales extends JPanel {
 							
 							@Override
 							public void actionPerformed(ActionEvent e) {
-								seleccionarImagen();
+								try {
+									seleccionarImagen(imagen);
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
 								
 							}
 						});
@@ -437,11 +548,11 @@ public class PanelGestionDatosPersonales extends JPanel {
 				}
 				
 			});
-			this.scrollPaneImagen.setViewportView(jlblIcono);
+			this.jsp.setViewportView(jlblIcono);
 		}
 		else {
 			JLabel jlblIcono = new JLabel("No hay imagen");
-			this.scrollPaneImagen.setViewportView(jlblIcono);
+			this.jsp.setViewportView(jlblIcono);
 		}
 	}
 
