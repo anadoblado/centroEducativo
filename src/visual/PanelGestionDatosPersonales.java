@@ -30,7 +30,7 @@ import model.controladores.TipologiaSexoControlador;
 
 public class PanelGestionDatosPersonales extends JPanel {
 	
-	 JTextField jtfId = new JTextField(10);
+	 public JTextField jtfId = new JTextField(10);
 	 JTextField jtfNombre = new JTextField(20);
 	 JTextField jtfPrimerApellido = new JTextField(20);
 	 JTextField jtfSegundoApellido = new JTextField(20);

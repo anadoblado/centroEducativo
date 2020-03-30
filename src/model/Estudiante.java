@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Estudiante.findAll", query="SELECT e FROM Estudiante e")
-public class Estudiante extends Entidad implements Serializable {
+public class Estudiante extends Entidad  implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -21,6 +21,8 @@ public class Estudiante extends Entidad implements Serializable {
 	private String apellido1;
 
 	private String apellido2;
+
+	private String color;
 
 	private String direccion;
 
@@ -69,6 +71,14 @@ public class Estudiante extends Entidad implements Serializable {
 
 	public void setApellido2(String apellido2) {
 		this.apellido2 = apellido2;
+	}
+
+	public String getColor() {
+		return this.color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
 	}
 
 	public String getDireccion() {

@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 
 import model.Profesor;
+import model.controladores.EstudianteControlador;
 import model.controladores.ProfesorControlador;
 import utils.CacheImagenes;
 
@@ -139,10 +140,22 @@ public class PanelGestionProfesor extends JPanel {
 		this.actual.setTelefono(this.panelDatos.getTelefono());
 		this.actual.setEmail(this.panelDatos.getEmail());
 		this.actual.setTipologiasexo(this.panelDatos.getTipologiaSexo());
+		this.actual.setColor(this.panelDatos.getColorElegido());
+		
+		if (actual.getId() == 0) {
+			ProfesorControlador.getInstancia().persist(actual);
+		
+		}
+		else {
+			ProfesorControlador.getInstancia().merge(actual);
+			
+		}
+		JOptionPane.showMessageDialog(this, "Guardado correctamente");
 	}
 	
 	private void cargarDatosAcual() {
 		if(this.actual != null) {
+			panelDatos.setId(String.valueOf(this.actual.getId()));
 			panelDatos.setNombre(this.actual.getNombre());
 			panelDatos.setPrimerApellido(this.actual.getApellido1());
 			panelDatos.setSegundoApellido(this.actual.getApellido2());
@@ -151,7 +164,7 @@ public class PanelGestionProfesor extends JPanel {
 			panelDatos.setTelefono(this.actual.getTelefono());
 			panelDatos.setEmail(this.actual.getEmail());
 			panelDatos.setTipologiaSexo(this.actual.getTipologiasexo());
-//			panelDatos.setColorElegido(this.actual.getColorElegido);
+			panelDatos.setColorElegido(this.actual.getColor());
 			
 		}
 		
