@@ -38,12 +38,12 @@ public class PanelGestionDatosPersonales extends JPanel {
 	 JTextField jtfEmail = new JTextField(20);
 	 JTextField jtfTelefono = new JTextField(20);
 	 JComboBox<Tipologiasexo> jcbSexo = new JComboBox<Tipologiasexo>();
-	private JScrollPane scrollPaneImagen;
-	private byte[] imagen;
+	 JScrollPane scrollPaneImagen;
+	// byte[] imagen;
 	 JButton jbtCambiarImg = new JButton("Elige imagen");
-	private JLabel jlblColorElegido;
+	 JLabel jlblColorElegido = new JLabel();
 	 JTextField jtfColorElegido = new JTextField(20);
-	private JButton jbtElegirColor = new JButton("Elige el color");
+	 JButton jbtElegirColor = new JButton("Elige el color");
 	//JPanel jpPaneAColorear = new JPanel();
 	
 
@@ -140,13 +140,13 @@ public class PanelGestionDatosPersonales extends JPanel {
 
 		// añadimos los campos para Email
 		c.gridx = 0;
-		c.gridy = 6;
+		c.gridy = 7;
 		c.gridwidth = 1;
 		c.anchor = GridBagConstraints.EAST;
 		panelGestion.add(new JLabel("Email: "), c);
 		
 		c.gridx = 1;
-		c.gridy = 6;
+		c.gridy = 7;
 		jtfEmail.setEnabled(true);
 		c.anchor = GridBagConstraints.WEST;
 		panelGestion.add(jtfEmail, c);
@@ -157,32 +157,37 @@ public class PanelGestionDatosPersonales extends JPanel {
 			jcbSexo.addItem(ti);
 		}
 		c.gridx = 0;
-		c.gridy = 7;
+		c.gridy = 8;
 		c.gridwidth = 1;
 		c.anchor = GridBagConstraints.EAST;
 		panelGestion.add(new JLabel("Sexo: "), c);
 		
 		c.gridx = 1;
-		c.gridy = 7;
+		c.gridy = 8;
 		c.anchor = GridBagConstraints.WEST;
 		panelGestion.add(jcbSexo, c);
 		
 		// añadimos los campos para Color
 		c.gridx = 0;
-		c.gridy = 8;
-		c.fill = GridBagConstraints.BOTH;
+		c.gridy = 9;
 		c.gridwidth = 1;
 		c.anchor = GridBagConstraints.EAST;
-		panelGestion.add(jbtElegirColor);
+		panelGestion.add( new JLabel("Color: "), c);
+		
 		
 		
 		c.gridx = 1;
-		c.gridy = 8;
+		c.gridy = 9;
 		jtfColorElegido.setEnabled(true);
 		c.anchor = GridBagConstraints.WEST;
 		panelGestion.add(jtfColorElegido, c);
 //		panelGestion.add(this.jpPaneAColorear, c);
 //		panelGestion.setBackground(color);
+		
+		c.gridx = 0;
+		c.gridy = 10;
+		c.anchor = GridBagConstraints.WEST;
+		panelGestion.add(jbtElegirColor, c);
 		
 		
 		jbtElegirColor.addActionListener(new ActionListener() {
@@ -325,92 +330,7 @@ public class PanelGestionDatosPersonales extends JPanel {
 	
 	
 	
-	public byte[] getImagen() {
-		return imagen;
-	}
 	
-	public void setImagen(byte[] iagen) {
-		this.imagen = imagen;
-		if(imagen != null && imagen.length > 0) {
-			ImageIcon icono = new ImageIcon(this.imagen);
-			JLabel jlblIcono = new JLabel(icono);
-			jlblIcono.addMouseListener(new MouseAdapter() {
-
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					// TODO Auto-generated method stub
-					super.mouseClicked(e);
-				}
-
-				@Override
-				public void mouseDragged(MouseEvent e) {
-					// TODO Auto-generated method stub
-					super.mouseDragged(e);
-				}
-
-				@Override
-				public void mouseEntered(MouseEvent e) {
-					// TODO Auto-generated method stub
-					super.mouseEntered(e);
-				}
-
-				@Override
-				public void mouseExited(MouseEvent e) {
-					// TODO Auto-generated method stub
-					super.mouseExited(e);
-				}
-
-				@Override
-				public void mouseMoved(MouseEvent e) {
-					// TODO Auto-generated method stub
-					super.mouseMoved(e);
-				}
-
-				@Override
-				public void mousePressed(MouseEvent e) {
-					// TODO Auto-generated method stub
-					super.mousePressed(e);
-				}
-
-				@Override
-				public void mouseReleased(MouseEvent e) {
-					// TODO Auto-generated method stub
-					super.mouseReleased(e);
-				}
-
-				@Override
-				public void mouseWheelMoved(MouseWheelEvent e) {
-					// TODO Auto-generated method stub
-					super.mouseWheelMoved(e);
-				}
-				
-				private void mostrarMenu(MouseEvent e) {
-					if(e.isPopupTrigger()) {
-						JPopupMenu menu = new JPopupMenu();
-						menu.add(new JMenuItem(icono.getIconWidth() + "x" + icono.getIconHeight() + "pixeles"));
-						menu.addSeparator();
-						JMenuItem miImagenSeleccionada = new JMenuItem("Seleccionar una imagen");
-						miImagenSeleccionada.addActionListener(new ActionListener() {
-							
-							@Override
-							public void actionPerformed(ActionEvent e) {
-//								seleccionarImagen();
-								
-							}
-						});
-						menu.add(miImagenSeleccionada);
-						menu.show(e.getComponent(), e.getX(), e.getY());
-					}
-				}
-				
-			});
-			this.scrollPaneImagen.setViewportView(jlblIcono);
-		}
-		else {
-			JLabel jlblIcono = new JLabel("No hay imagen");
-			this.scrollPaneImagen.setViewportView(jlblIcono);
-		}
-	}
 	
 
 	

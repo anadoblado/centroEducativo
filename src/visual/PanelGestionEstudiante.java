@@ -146,6 +146,7 @@ public class PanelGestionEstudiante extends JPanel {
 		this.actual.setTelefono(this.panelDatos.getTelefono());
 		this.actual.setEmail(this.panelDatos.getEmail());
 		this.actual.setTipologiasexo(this.panelDatos.getTipologiaSexo());
+		this.actual.set
 	}
 
 	/**
