@@ -201,15 +201,11 @@ public class PanelGestionDatosPersonales extends JPanel {
 		c.anchor = GridBagConstraints.EAST;
 		this.add( new JLabel("Color: "), c);
 		
-		
-		
 		c.gridx = 1;
 		c.gridy = 9;
 		jtfColorElegido.setEnabled(true);
 		c.anchor = GridBagConstraints.WEST;
 		this.add(jtfColorElegido, c);
-//		panelGestion.add(this.jpPaneAColorear, c);
-//		panelGestion.setBackground(color);
 		
 		c.gridx = 2;
 		c.gridy = 9;
@@ -224,7 +220,7 @@ public class PanelGestionDatosPersonales extends JPanel {
 			}
 		});
 		
-		
+        // para añadir la imagen
 //		c.weightx = 2;
 		c.gridheight = 4;
 		c.gridx = 2;
