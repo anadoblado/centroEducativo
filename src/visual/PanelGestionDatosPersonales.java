@@ -225,7 +225,7 @@ public class PanelGestionDatosPersonales extends JPanel {
 		c.gridheight = 4;
 		c.gridx = 2;
 		c.gridy = 1;
-//		c.gridwidth =1;
+//		c.gridwidth = 2;
 		//c.insets = new Insets(0,0,5,5);
 		jsp.setPreferredSize(new Dimension(100, 100));
 		jsp.setMaximumSize(new Dimension(100, 100));
@@ -252,7 +252,9 @@ public class PanelGestionDatosPersonales extends JPanel {
 				
 	}
 
-	
+	/**
+	 * Método que usaremos para limpiar la pantalla de usuarios
+	 */
 	public void limpiarPantalla() {
 		this.jtfId.setText("");
 		this.jtfNombre.setText("");
@@ -270,6 +272,11 @@ public class PanelGestionDatosPersonales extends JPanel {
 		
 	}
 	
+	
+	/**
+	 * A continuación están los get y set de los campos comunes
+	 * @return
+	 */
 	public String getId() {
 		return jtfId.getText();
 	}
@@ -344,6 +351,11 @@ public class PanelGestionDatosPersonales extends JPanel {
 		return jtfColorElegido.getText();
 	}
 	
+	/**
+	 * Pone el color elegido por el usuario en el ColorPicket como 
+	 * color en el panel
+	 * @param colorElegido
+	 */
 	public void setColorElegido(String colorElegido) {
 		this.jtfColorElegido.setText(colorElegido);
 		try {
@@ -353,6 +365,9 @@ public class PanelGestionDatosPersonales extends JPanel {
 		}
 	}
 	
+	/**
+	 * El usuario elige un color para su panel
+	 */
 	public void seleccionarColor() {
 		Color color = (new JColorChooser().showDialog(null, "Elige un color", Color.gray));
 		// cuando se elige un color, el color inicial deja de ser null
@@ -366,7 +381,14 @@ public class PanelGestionDatosPersonales extends JPanel {
 	}
 	
 	
-	
+	/**
+	 * Con este método el usuario elige
+	 * la imagen que tendrá en su perfil
+	 * 
+	 * @param imagen
+	 * @return
+	 * @throws IOException
+	 */
 	public byte[] seleccionarImagen(byte[] imagen) throws IOException {
 		this.jfileChooser = new JFileChooser();
 		byte[] imagenSeleccionada = null;
@@ -415,19 +437,6 @@ public class PanelGestionDatosPersonales extends JPanel {
 					setImagen(imagenSeleccionada);
 					return imagenSeleccionada;
 					
-//					FileReader fileReader = new FileReader(fichero);
-//					BufferedReader bufferedReader = new BufferedReader(fileReader);
-//			
-//					StringBuffer sb = new StringBuffer();
-//					String lineaDelFichero;
-//			
-//					// Lectura del fichero línea a línea
-//					while ((lineaDelFichero = bufferedReader.readLine()) != null) {
-//						sb.append(lineaDelFichero + "\n");
-//					}
-//					
-//					// Volcamos el contenido del fichero al JTextArea
-//					this.jtaContenidoFichero.setText(sb.toString());
 				}
 				catch (Exception ex) {
 					ex.printStackTrace();
@@ -437,7 +446,6 @@ public class PanelGestionDatosPersonales extends JPanel {
 		imagenSeleccionada = imagen;
 		return imagen;
 		
-
 	}
 	
 	public Tipologiasexo getTipologiaSexo() {
@@ -463,6 +471,11 @@ public class PanelGestionDatosPersonales extends JPanel {
 		return imagen;
 	}
 	
+	/**
+	 * Pone la imagen seleccionada en el panel elegido
+	 * çcon un JScroolPanel
+	 * @param imagen
+	 */
 	public void setImagen(byte[] imagen) {
 		this.imagen = imagen;
 		if(imagen != null && imagen.length > 0) {

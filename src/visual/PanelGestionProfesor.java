@@ -27,6 +27,7 @@ public class PanelGestionProfesor extends JPanel {
 	public static int REMOVE = 6;
 
 	Profesor actual = null;
+	/* Es igual que el Estudiante, allí se comentan los métodos*/
 	PanelGestionDatosPersonales panelDatos = new PanelGestionDatosPersonales();
 	
 	public PanelGestionProfesor() {

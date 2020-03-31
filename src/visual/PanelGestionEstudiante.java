@@ -28,8 +28,13 @@ public class PanelGestionEstudiante extends JPanel {
 	public static int REMOVE = 6;
 
 	Estudiante actual = null;
+	//Se crea un objeto de tipo Panel de Gestión de Datos Personales porque es común a varios usuarios
 	PanelGestionDatosPersonales panelDatos = new PanelGestionDatosPersonales();
 
+	
+	/**
+	 * Construimos el Panel que se verá para el Estudiante
+	 */
 	public PanelGestionEstudiante() {
 		
 		actual = EstudianteControlador.getInstancia().findFirst();
@@ -41,6 +46,10 @@ public class PanelGestionEstudiante extends JPanel {
 		cargarDatosAcual();
 	}
 
+	/**
+	 * Hacemos los botones del menú
+	 * @return
+	 */
 	private JToolBar getBarraToolbar() {
 		JToolBar tb = new JToolBar();
 		
@@ -82,6 +91,12 @@ public class PanelGestionEstudiante extends JPanel {
 		return tb;
 	}
 	
+	/**
+	 * Aquí se le da la función a cada botón
+	 * @param jbt
+	 * @param icono
+	 * @param funcion
+	 */
 	private void asignarFuncion(JButton jbt, String icono, final int funcion) {
 		jbt.setIcon(CacheImagenes.getCacheImagenes().getIcono(icono));
 		jbt.addActionListener(new ActionListener () {
@@ -125,8 +140,9 @@ public class PanelGestionEstudiante extends JPanel {
 		});
 		
 	}
+	
 	/**
-	 * 
+	 * Crear un nuevo Estudiante 
 	 */
 	private void nuevo() {
 		this.panelDatos.limpiarPantalla();
@@ -136,7 +152,9 @@ public class PanelGestionEstudiante extends JPanel {
 	
 
 
-	
+	/**
+	 * Guardar un Estudiante
+	 */
 	private void guardar() {
 		this.actual.setNombre(this.panelDatos.getNombre());
 		this.actual.setApellido1(this.panelDatos.getPrimerApellido());
@@ -161,7 +179,7 @@ public class PanelGestionEstudiante extends JPanel {
 	}
 
 	/**
-	 * 
+	 * Carga los datos
 	 */
 	private void cargarDatosAcual() {
 		if(this.actual != null) {
@@ -182,7 +200,7 @@ public class PanelGestionEstudiante extends JPanel {
 	}
 
 	/**
-	 * 
+	 * Elimina al Estudiante
 	 * @return
 	 */
 	private Estudiante eliminar() {
