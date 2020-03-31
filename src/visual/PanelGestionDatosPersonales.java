@@ -49,7 +49,8 @@ public class PanelGestionDatosPersonales extends JPanel {
 	 JTextField jtfEmail = new JTextField(20);
 	 JTextField jtfTelefono = new JTextField(20);
 	 JComboBox<Tipologiasexo> jcbSexo = new JComboBox<Tipologiasexo>();
-	 JScrollPane jsp = new JScrollPane(new JLabel());
+	 JLabel jlbImagen = new JLabel();
+	 JScrollPane jsp = new JScrollPane(jlbImagen);
 	 byte[] imagen;
 	 JButton jbtCambiarImg = new JButton("Elige imagen");
 	 JLabel jlblColorElegido = new JLabel();
@@ -57,11 +58,7 @@ public class PanelGestionDatosPersonales extends JPanel {
 	 JButton jbtElegirColor = new JButton("Elige el color");
 	 JFileChooser jfileChooser;
 	 
-	public JScrollPane creaScrollPane(String nombreIcono) {
-			JLabel jlb = new JLabel(CacheImagenes.getCacheImagenes().getIcono(nombreIcono));
-			JScrollPane scrollPaneImagen = new JScrollPane(jlb);
-			return scrollPaneImagen;
-		}
+	
 	 
 	
 
@@ -70,8 +67,8 @@ public class PanelGestionDatosPersonales extends JPanel {
 		GridBagConstraints c = new GridBagConstraints();
 		
 
-		// añadimos los campos para nombre
-		c.fill = GridBagConstraints.NONE;
+		// añadimos los campos para ID
+		c.fill = GridBagConstraints.BOTH;
 		c.gridx = 0;
 		c.gridy = 0;
 		c.gridwidth = 1;
@@ -86,7 +83,7 @@ public class PanelGestionDatosPersonales extends JPanel {
 		this.add(jtfId, c);
 		
 		// añadimos los campos para nombre
-		c.fill = GridBagConstraints.NONE;
+//		c.fill = GridBagConstraints.NONE;
 		c.gridx = 0;
 		c.gridy = 1;
 		c.gridwidth = 1;
@@ -96,6 +93,7 @@ public class PanelGestionDatosPersonales extends JPanel {
 		
 		c.gridx = 1;
 		c.gridy = 1;
+		c.weightx = 1;
 		jtfNombre.setEnabled(true);
 		c.anchor = GridBagConstraints.WEST;
 		this.add(jtfNombre, c);
@@ -103,6 +101,7 @@ public class PanelGestionDatosPersonales extends JPanel {
 		// añadimos los campos para primerApellido
 		c.gridx = 0;
 		c.gridy = 2;
+		c.weightx = 0;
 		c.gridwidth = 1;
 		c.anchor = GridBagConstraints.EAST;
 		this.add(new JLabel("Primer Apellido: "), c);
@@ -148,13 +147,12 @@ public class PanelGestionDatosPersonales extends JPanel {
 		
 		c.gridx = 1;
 		c.gridy = 5;
-		c.gridwidth = 2;
+		c.gridwidth = 1;
 		jtfDireccion.setEnabled(true);
 		c.anchor = GridBagConstraints.WEST;
 		this.add(jtfDireccion, c);
 		
 		// añadimos los campos para Teléfono
-		c.gridwidth = 1;
 		c.gridx = 0;
 		c.gridy = 6;
 		c.gridwidth = 1;
@@ -227,18 +225,17 @@ public class PanelGestionDatosPersonales extends JPanel {
 		});
 		
 		
-		//GridBagConstraints d = new GridBagConstraints();
-		c.weightx = 2;
+//		c.weightx = 2;
 		c.gridheight = 4;
 		c.gridx = 2;
 		c.gridy = 1;
-		c.gridwidth =2;
-		c.fill = GridBagConstraints.BOTH;
+//		c.gridwidth =1;
 		//c.insets = new Insets(0,0,5,5);
 		jsp.setPreferredSize(new Dimension(100, 100));
+		jsp.setMaximumSize(new Dimension(100, 100));
 		this.add(jsp, c);
 		
-		c.weightx = 1;
+//		c.weightx = 1;
 		c.gridheight = 1;
 		c.gridx = 2;
 		c.gridy = 6;
@@ -272,6 +269,8 @@ public class PanelGestionDatosPersonales extends JPanel {
 		this.jcbSexo.setSelectedIndex(0);
 		this.jtfColorElegido.setText("");
 		this.setBackground(Color.gray);
+		this.jsp.setViewportView(null);
+
 		
 	}
 	
@@ -557,7 +556,11 @@ public class PanelGestionDatosPersonales extends JPanel {
 	}
 
 	
-	
+	public JScrollPane creaScrollPane(String nombreIcono) {
+		JLabel jlb = new JLabel(CacheImagenes.getCacheImagenes().getIcono(nombreIcono));
+		JScrollPane scrollPaneImagen = new JScrollPane(jlb);
+		return scrollPaneImagen;
+	}
 
 	
 	public PanelGestionDatosPersonales(LayoutManager arg0) {
