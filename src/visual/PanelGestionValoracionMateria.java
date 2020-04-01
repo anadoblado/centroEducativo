@@ -109,6 +109,9 @@ public class PanelGestionValoracionMateria extends JPanel {
 			c.fill = GridBagConstraints.BOTH;
 			c.gridx = 0;
 			c.gridy = 0 + i;
+			c.gridwidth = 1;
+			c.anchor = GridBagConstraints.EAST;
+			c.insets = new Insets (2,2,2,2);
 			panel.add(new JLabel(e.toString()), c);
 			i++;
 		}
