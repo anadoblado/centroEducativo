@@ -565,11 +565,11 @@ public class PanelGestionDatosPersonales extends JPanel {
 	}
 
 	
-	public JScrollPane creaScrollPane(String nombreIcono) {
-		JLabel jlb = new JLabel(CacheImagenes.getCacheImagenes().getIcono(nombreIcono));
-		JScrollPane scrollPaneImagen = new JScrollPane(jlb);
-		return scrollPaneImagen;
-	}
+//	public JScrollPane creaScrollPane(String nombreIcono) {
+//		JLabel jlb = new JLabel(CacheImagenes.getCacheImagenes().getIcono(nombreIcono));
+//		JScrollPane scrollPaneImagen = new JScrollPane(jlb);
+//		return scrollPaneImagen;
+//	}
 
 	
 	public PanelGestionDatosPersonales(LayoutManager arg0) {
