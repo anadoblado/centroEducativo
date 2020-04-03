@@ -161,7 +161,7 @@ public class Estudiante extends Entidad  implements Serializable {
 
 	@Override
 	public String toString() {
-		return nombre + apellido1 +  apellido2 ;
+		return nombre + " " + apellido1 + " " +  apellido2 ;
 	}
 	
 	public boolean equals(Object obj) {
