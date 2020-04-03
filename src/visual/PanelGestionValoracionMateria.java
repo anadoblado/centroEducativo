@@ -123,6 +123,7 @@ public class PanelGestionValoracionMateria extends JPanel {
 		c.gridy = 4;
 		c.anchor = GridBagConstraints.CENTER;
 		panel1.add(jbtGuardar, c);
+		
 		jbtGuardar.addActionListener(new ActionListener() {
 			
 			@Override
