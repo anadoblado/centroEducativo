@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Date;
 
 
 /**
@@ -10,12 +11,15 @@ import javax.persistence.*;
  */
 @Entity
 @NamedQuery(name="Valoracionmateria.findAll", query="SELECT v FROM Valoracionmateria v")
-public class Valoracionmateria extends Entidad  implements Serializable {
+public class Valoracionmateria extends Entidad implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
+
+	@Temporal(TemporalType.DATE)
+	private Date fecha;
 
 	private float valoracion;
 
@@ -43,6 +47,14 @@ public class Valoracionmateria extends Entidad  implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public Date getFecha() {
+		return this.fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 
 	public float getValoracion() {

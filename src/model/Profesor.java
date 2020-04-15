@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Profesor.findAll", query="SELECT p FROM Profesor p")
-public class Profesor extends Entidad  implements Serializable {
+public class Profesor extends Entidad implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -158,10 +158,10 @@ public class Profesor extends Entidad  implements Serializable {
 
 		return valoracionmateria;
 	}
-
+	
 	@Override
 	public String toString() {
-		return nombre + apellido1 + apellido2;
+		return nombre + " " + apellido1 + " " + apellido2;
 	}
 	
 	public boolean equals(Object obj) {
@@ -174,5 +174,5 @@ public class Profesor extends Entidad  implements Serializable {
 		
 	}
 
-	
+
 }

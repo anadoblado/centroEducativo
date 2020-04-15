@@ -34,6 +34,7 @@ public class Menu extends JMenuBar {
 		menuGes.add(crearNuevoMenuItem("Materia", new PanelGestionMateria()));
 		menuGes.add(crearNuevoMenuItem("Profesor", new PanelGestionProfesor()));
 		menuGes.add(crearNuevoMenuItem("Valoracion Materia", new PanelGestionValoracionMateria()));
+		menuGes.add(crearNuevoMenuItem("Valoración Materia Masiva", new PanelGestionValoracionMasiva()));
 		
 		this.add(menuGes);
 	}

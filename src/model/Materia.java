@@ -86,7 +86,7 @@ public class Materia extends Entidad implements Serializable {
 
 		return valoracionmateria;
 	}
-
+	
 	@Override
 	public String toString() {
 		return nombre;
@@ -101,7 +101,6 @@ public class Materia extends Entidad implements Serializable {
 		return false;
 		
 	}
-	
-	
+
 
 }
