@@ -53,16 +53,17 @@ public class PanelGestionValoracionMasiva extends JPanel {
 	JComboBox<Profesor> jcbProfesor = new JComboBox<Profesor>();
 	JSlider js = null;
 	JLabel jlNota = null;
-	String valorNota = null;
 	private DefaultListModel<Estudiante> listModelAlumnos = null;
 	private List<Estudiante> alumnos = EstudianteControlador.getInstancia().findAllEstudiantes();
 	private JList jlistAlumnos;
 	private JList jlistAlumnos2;
 	JButton jbtRefrescar = new JButton("Refrescar alumno");
+	JButton jbtGuardar = new JButton("Guradar alumno con nota");
 	JButton jbtPasarADerechaUno = new JButton(">");
 	JButton jbtPasarADerechaTodos = new JButton(">>");
 	JButton jbtPasarAIzquierdaUno = new JButton("<");
 	JButton jbtPasarAIzquierdaTodos = new JButton("<<");
+	
 	
 		
 	/**
@@ -183,8 +184,8 @@ public class PanelGestionValoracionMasiva extends JPanel {
 		c.anchor = GridBagConstraints.CENTER;
 		panel1.add(jbtRefrescar, c);
 	
-
 		
+		// Panel con las listas y los botones
 		c.gridx = 1;
 		c.gridy = 5;
 		c.fill = GridBagConstraints.BOTH;
@@ -193,11 +194,12 @@ public class PanelGestionValoracionMasiva extends JPanel {
 		panel1.add(panelListas(), c);
 		
 		
-		
-		
-		
-		
-
+        // Añadir botón de gurdar
+		c.gridx = 1;
+		c.gridy = 6;
+		c.insets = new Insets(3, 3, 3, 3);
+		c.anchor = GridBagConstraints.CENTER;
+		panel1.add(jbtGuardar, c);
 		
 		
 	
@@ -296,7 +298,8 @@ public class PanelGestionValoracionMasiva extends JPanel {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						scrollJList.setViewportView((Component) alumnos);
+						scrollJList.setViewportView(jlistAlumnos);
+	
 				
 				
 				
