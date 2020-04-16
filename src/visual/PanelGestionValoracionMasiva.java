@@ -212,10 +212,48 @@ public class PanelGestionValoracionMasiva extends JPanel {
 		
         // Añadir botón de gurdar
 		c.gridx = 2;
-		c.gridy = 6;
+		c.gridy = 4;
 		c.insets = new Insets(3, 3, 3, 3);
 		c.anchor = GridBagConstraints.CENTER;
 		panel1.add(jbtGuardar, c);
+		
+		jbtGuardar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Profesor p = (Profesor) jcbProfesor.getSelectedItem();
+				Materia m = (Materia) jcbMateria.getSelectedItem();
+				List<Estudiante> listaTodosEstudiantes = EstudianteControlador.getInstancia().findAllEstudiantes();
+				List<Estudiante> listaEstudiantes = new ArrayList<Estudiante>();
+				
+				for (int i = 0; i < listaTodosEstudiantes.size(); i++) {
+					if (listModelAlumnosSeleccionados.contains(listaTodosEstudiantes.get(i))) {
+						listaEstudiantes.add(listaTodosEstudiantes.get(i));
+					}
+				}
+						
+				for(Estudiante es : listaEstudiantes) {
+					Valoracionmateria valoracion = ValoracionMateriaControlador.getInstancia().findByEstudianteAndProfesorAndMateria(p, m, es);
+					if (valoracion != null) {
+						valoracion.setValoracion(js.getValue());
+						valoracion.setFecha((Date) getJFormattedTextFieldDatePersonalizado().getValue());
+						ValoracionMateriaControlador.getInstancia().merge(valoracion);
+					}
+					else {
+						Valoracionmateria v = new Valoracionmateria();
+						v.setEstudiante(es);
+						v.setMateria(m);
+						v.setProfesor(p);
+						v.setFecha((Date)getJFormattedTextFieldDatePersonalizado().getValue()); 
+						v.setValoracion(js.getValue());
+						ValoracionMateriaControlador.getInstancia().persist(v);
+						
+					}
+					
+				}
+				
+			}
+		});
 		
 		
 	
@@ -363,8 +401,7 @@ public class PanelGestionValoracionMasiva extends JPanel {
 		c.anchor = GridBagConstraints.WEST;
 		panel.add(jspAlumnosSeleccionados,c);
 		
-		
-		
+ 		
 		return panel;
 	}
 	
@@ -405,32 +442,6 @@ public class PanelGestionValoracionMasiva extends JPanel {
 	}
 
 
-//	/**
-//	 * @return the valorNota
-//	 */
-//	public String getValorNota() {
-//		return valorNota;
-//	}
-//
-//	/**
-//	 * @param valorNota the valorNota to set
-//	 */
-//	public void setValorNota(String valorNota) {
-//		this.valorNota = valorNota;
-//	}
-
-//	public static JSlider instance() {
-//		return instance ((Utils.obtenerNumeroAzar(0, 1) == 0) ? JSlider.HORIZONTAL : JSlider.VERTICAL, MIN, MAX, INIT);
-//	}
-//
-//	public static JSlider instance (int tipo, int min, int max, int init) {
-//		JSlider js = new JSlider (tipo, min, max, init);
-//		js.setMajorTickSpacing(10);
-//		js.setMinorTickSpacing(1);
-//		js.setPaintTicks(true);
-//		js.setPaintLabels(true);
-//		return js;
-//	}
 
 	
 
