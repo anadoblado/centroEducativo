@@ -53,7 +53,6 @@ public class PanelGestionValoracionMasiva extends JPanel {
 	JComboBox<Profesor> jcbProfesor = new JComboBox<Profesor>();
 	JSlider js = null;
 	JLabel jlNota = null;
-	private List<Estudiante> alumnos = EstudianteControlador.getInstancia().findAllEstudiantes();
 	
 	private DefaultListModel<Estudiante> listModelAlumnosDisponibles = new DefaultListModel<Estudiante>();
 	private JList jlistAlumnosDisponibles = new JList<Estudiante>(listModelAlumnosDisponibles);
@@ -63,10 +62,6 @@ public class PanelGestionValoracionMasiva extends JPanel {
 	private JList jlistAlumnosSeleccionados = new JList<Estudiante>(listModelAlumnosSeleccionados);
 	private JScrollPane jspAlumnosSeleccionados = new JScrollPane(jlistAlumnosSeleccionados);
 
-	
-	DefaultListModel<Estudiante> lmDisponibles = new DefaultListModel<Estudiante>();
-	JList<Estudiante> jListDisponibles = new JList<Estudiante>(lmDisponibles);
-	JScrollPane jScrollDisponibles = new JScrollPane(jListDisponibles);
 	
 	JButton jbtRefrescar = new JButton("Refrescar alumno");
 	JButton jbtGuardar = new JButton("Guradar alumno con nota");
