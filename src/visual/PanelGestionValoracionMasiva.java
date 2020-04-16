@@ -264,6 +264,11 @@ public class PanelGestionValoracionMasiva extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				List<Estudiante> todosLosEstudiantes = EstudianteControlador.getInstancia().findAllEstudiantes();
+				for (Estudiante est: todosLosEstudiantes) {
+					listModelAlumnosSeleccionados.addElement(est);
+					listModelAlumnosDisponibles.removeElement(est);
+				}
 				
 				
 			}
@@ -292,6 +297,20 @@ public class PanelGestionValoracionMasiva extends JPanel {
 		c.gridx = 0;
 		c.gridy = 3;
 		panel.add(jbtPasarAIzquierdaTodos, c);
+		
+		jbtPasarAIzquierdaTodos.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				List<Estudiante> todosLosEstudiantes = EstudianteControlador.getInstancia().findAllEstudiantes();
+				for (Estudiante est: todosLosEstudiantes) {
+					listModelAlumnosDisponibles.addElement(est);
+					listModelAlumnosSeleccionados.removeElement(est);
+				}
+
+				
+			}
+		});
 
 		
 		return panel;
