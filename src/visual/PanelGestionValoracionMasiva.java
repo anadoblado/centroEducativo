@@ -1,7 +1,7 @@
 package visual;
 
 import java.awt.BorderLayout;
-
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -25,8 +25,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+import com.sun.prism.paint.Color;
 
 import model.Estudiante;
 import model.Materia;
@@ -55,6 +59,11 @@ public class PanelGestionValoracionMasiva extends JPanel {
 	private JList jlistAlumnos;
 	private JList jlistAlumnos2;
 	JButton jbtRefrescar = new JButton("Refrescar alumno");
+	JButton jbtPasarADerechaUno = new JButton(">");
+	JButton jbtPasarADerechaTodos = new JButton(">>");
+	JButton jbtPasarAIzquierdaUno = new JButton("<");
+	JButton jbtPasarAIzquierdaTodos = new JButton("<<");
+	
 		
 	/**
 	 * 
@@ -73,6 +82,7 @@ public class PanelGestionValoracionMasiva extends JPanel {
 					}
 				});
 	}
+	
 	
 	/**
 	 * 
@@ -120,11 +130,13 @@ public class PanelGestionValoracionMasiva extends JPanel {
 		panel1.add(jcbMateria, c);
 		
 		
+		// Se añade un JLabel para la nota
 		c.gridx = 0;
 		c.gridy = 2;
 		c.anchor = GridBagConstraints.EAST;
 		panel1.add(new JLabel("Nota: "), c);
 		
+		// Se construye el JSlider y se introduce
 		js = new JSlider (MIN, MAX, INIT);
 		js.setMajorTickSpacing(MAX);
 		js.setMinorTickSpacing(MIN);
@@ -138,20 +150,22 @@ public class PanelGestionValoracionMasiva extends JPanel {
 		c.anchor = GridBagConstraints.CENTER;
 		panel1.add(js, c);
 		
+		// Un JLabel donde aparece la nota que ponemos
 		c.fill = GridBagConstraints.CENTER;
 		c.gridx = 2;
 		c.gridy = 2;
 		c.gridwidth = 1;
-		c.anchor = GridBagConstraints.WEST;
-		panel1.add(new JLabel("Nota puesta"), c);
+		c.anchor = GridBagConstraints.EAST;
+		panel1.add(new JLabel("   Es tu nota"), c);
 		
-//		valorNota = Integer.toString(js.getValue());
+		
 		jlNota = new JLabel();
-		c.gridx = 3;
+		c.gridx = 2;
 		c.gridy = 2;
 		c.anchor = GridBagConstraints.WEST;
 		panel1.add(jlNota, c);
 		
+		// Se introduce la fecha de la evaluación
 		c.gridx = 0;
 		c.gridy = 3;
 		c.anchor = GridBagConstraints.SOUTHEAST;
@@ -161,50 +175,135 @@ public class PanelGestionValoracionMasiva extends JPanel {
 		c.anchor = GridBagConstraints.SOUTHWEST;
 		panel1.add(getJFormattedTextFieldDatePersonalizado(), c);
 		
+
+		// Añadir botón de refrescar
+		c.gridx = 1;
+		c.gridy = 4;
+		c.insets = new Insets(3, 3, 3, 3);
+		c.anchor = GridBagConstraints.CENTER;
+		panel1.add(jbtRefrescar, c);
+	
+
+		
+		c.gridx = 1;
+		c.gridy = 5;
+		c.fill = GridBagConstraints.BOTH;
+		c.insets = new Insets(5, 5, 5, 5);
+		c.anchor = GridBagConstraints.CENTER;
+		panel1.add(panelListas(), c);
+		
+		
+		
+		
+		
+		
+
+		
+		
+	
+		return panel1;
+		
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	private JPanel getPanelBotones(){
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+
+		
+        // Botones centrales
+		c.gridwidth = 1;
+		c.insets = new Insets(1, 1, 1, 1);
+		c.gridx = 0;
+		c.gridy = 0;
+		c.anchor = GridBagConstraints.CENTER;
+		panel.add(jbtPasarADerechaUno, c);
+		
+		c.gridwidth = 1;
+		c.gridx = 0;
+		c.gridy = 1;
+		panel.add(jbtPasarADerechaTodos, c);
+		
+		c.gridwidth = 1;
+		c.gridx = 0;
+		c.gridy = 2;
+		panel.add(jbtPasarAIzquierdaUno, c);
+		
+		c.gridwidth = 1;
+		c.gridx = 0;
+		c.gridy = 3;
+		panel.add(jbtPasarAIzquierdaTodos, c);
+
+		
+		return panel;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	private JPanel panelListas() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		
+		// Se introducen los paneles donde salen los listados de alumnos
 		jlistAlumnos = new JList(this.getDefaultListModel());
 		this.jlistAlumnos.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		JScrollPane scrollJList = new JScrollPane(jlistAlumnos);
+		jlistAlumnos.getSelectedValuesList();
 		
 		
-		c.gridwidth = 2;
+		c.gridwidth = 1;
 		c.insets = new Insets(5, 5, 5, 5);
 		c.fill = GridBagConstraints.BOTH;
 		c.gridx = 0;
-		c.gridy = 4;
+		c.gridy = 0;
 		c.weighty = 1;
-		panel1.add(scrollJList,c);
-
+		c.anchor = GridBagConstraints.EAST;
+		panel.add(scrollJList,c);
+		
+		
+		c.gridwidth = 1;
+		c.insets = new Insets(3, 3, 3, 3);
+		c.fill = GridBagConstraints.BOTH;
+		c.gridx = 1;
+		c.gridy = 0;
+		c.weighty = 1;
+		c.anchor = GridBagConstraints.CENTER;
+		panel.add(getPanelBotones(),c);
+		
+		
 		jlistAlumnos2 = new JList(this.getDefaultListModel());
 		this.jlistAlumnos2.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		JScrollPane scrollJList2 = new JScrollPane(jlistAlumnos2);
 		
 		
-		c.gridwidth = 2;
+		c.gridwidth = 1;
 		c.insets = new Insets(5, 5, 5, 5);
 		c.fill = GridBagConstraints.BOTH;
 		c.gridx = 2;
-		c.gridy = 4;
+		c.gridy = 0;
 		c.weighty = 1;
-		panel1.add(scrollJList2,c);
-
-// Añadir botón de refrescar
-		c.gridx = 1;
-		c.gridy = 5;
-		c.anchor = GridBagConstraints.CENTER;
-		panel1.add(jbtRefrescar, c);
+		c.anchor = GridBagConstraints.WEST;
+		panel.add(scrollJList2,c);
 		
 		jbtRefrescar.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				scrollJList.setViewportView(jlistAlumnos);
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						scrollJList.setViewportView((Component) alumnos);
+				
 				
 				
 			}
 		});
-	
-		return panel1;
 		
+		return panel;
 	}
 	
 
