@@ -53,10 +53,21 @@ public class PanelGestionValoracionMasiva extends JPanel {
 	JComboBox<Profesor> jcbProfesor = new JComboBox<Profesor>();
 	JSlider js = null;
 	JLabel jlNota = null;
-	private DefaultListModel<Estudiante> listModelAlumnos = null;
 	private List<Estudiante> alumnos = EstudianteControlador.getInstancia().findAllEstudiantes();
-	private JList jlistAlumnos;
-	private JList jlistAlumnos2;
+	
+	private DefaultListModel<Estudiante> listModelAlumnosDisponibles = new DefaultListModel<Estudiante>();
+	private JList jlistAlumnosDisponibles = new JList<Estudiante>(listModelAlumnosDisponibles);
+	private JScrollPane jspAlumnosDisponibles = new JScrollPane(jlistAlumnosDisponibles);
+	
+	private DefaultListModel<Estudiante> listModelAlumnosSeleccionados = new DefaultListModel<Estudiante>();
+	private JList jlistAlumnosSeleccionados = new JList<Estudiante>(listModelAlumnosSeleccionados);
+	private JScrollPane jspAlumnosSeleccionados = new JScrollPane(jlistAlumnosSeleccionados);
+
+	
+	DefaultListModel<Estudiante> lmDisponibles = new DefaultListModel<Estudiante>();
+	JList<Estudiante> jListDisponibles = new JList<Estudiante>(lmDisponibles);
+	JScrollPane jScrollDisponibles = new JScrollPane(jListDisponibles);
+	
 	JButton jbtRefrescar = new JButton("Refrescar alumno");
 	JButton jbtGuardar = new JButton("Guradar alumno con nota");
 	JButton jbtPasarADerechaUno = new JButton(">");
@@ -184,6 +195,16 @@ public class PanelGestionValoracionMasiva extends JPanel {
 		c.anchor = GridBagConstraints.CENTER;
 		panel1.add(jbtRefrescar, c);
 	
+		jbtRefrescar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				List<Estudiante> listaEstudiantes = EstudianteControlador.getInstancia().findAllEstudiantes();
+				for (Estudiante es : listaEstudiantes) {
+					listModelAlumnosDisponibles.addElement(es);
+				}
+			}
+		});
 		
 		// Panel con las listas y los botones
 		c.gridx = 1;
@@ -254,11 +275,8 @@ public class PanelGestionValoracionMasiva extends JPanel {
 		GridBagConstraints c = new GridBagConstraints();
 		
 		// Se introducen los paneles donde salen los listados de alumnos
-		jlistAlumnos = new JList(this.getDefaultListModel());
-		this.jlistAlumnos.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		JScrollPane scrollJList = new JScrollPane(jlistAlumnos);
-		jlistAlumnos.getSelectedValuesList();
-		
+
+//		this.jlistAlumnos.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		
 		c.gridwidth = 1;
 		c.insets = new Insets(5, 5, 5, 5);
@@ -267,7 +285,7 @@ public class PanelGestionValoracionMasiva extends JPanel {
 		c.gridy = 0;
 		c.weighty = 1;
 		c.anchor = GridBagConstraints.EAST;
-		panel.add(scrollJList,c);
+		panel.add(jspAlumnosDisponibles,c);
 		
 		
 		c.gridwidth = 1;
@@ -280,9 +298,9 @@ public class PanelGestionValoracionMasiva extends JPanel {
 		panel.add(getPanelBotones(),c);
 		
 		
-		jlistAlumnos2 = new JList(this.getDefaultListModel());
-		this.jlistAlumnos2.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		JScrollPane scrollJList2 = new JScrollPane(jlistAlumnos2);
+	
+//		this.jlistAlumnos2.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+	
 		
 		
 		c.gridwidth = 1;
@@ -292,19 +310,9 @@ public class PanelGestionValoracionMasiva extends JPanel {
 		c.gridy = 0;
 		c.weighty = 1;
 		c.anchor = GridBagConstraints.WEST;
-		panel.add(scrollJList2,c);
+		panel.add(jspAlumnosSeleccionados,c);
 		
-		jbtRefrescar.addActionListener(new ActionListener() {
-					
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						scrollJList.setViewportView(jlistAlumnos);
-	
-				
-				
-				
-			}
-		});
+		
 		
 		return panel;
 	}
@@ -341,8 +349,8 @@ public class PanelGestionValoracionMasiva extends JPanel {
 	}
 	
 	private DefaultListModel getDefaultListModel () {
-		this.listModelAlumnos = new DefaultListModel<Estudiante>();
-		return this.listModelAlumnos;
+		this.listModelAlumnosDisponibles = new DefaultListModel<Estudiante>();
+		return this.listModelAlumnosDisponibles;
 	}
 
 
