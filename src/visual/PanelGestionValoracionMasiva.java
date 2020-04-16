@@ -194,6 +194,7 @@ public class PanelGestionValoracionMasiva extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				listModelAlumnosDisponibles.removeAllElements();
 				List<Estudiante> listaEstudiantes = EstudianteControlador.getInstancia().findAllEstudiantes();
 				for (Estudiante es : listaEstudiantes) {
 					listModelAlumnosDisponibles.addElement(es);
