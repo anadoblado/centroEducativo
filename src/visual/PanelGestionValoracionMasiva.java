@@ -162,14 +162,14 @@ public class PanelGestionValoracionMasiva extends JPanel {
 		c.gridx = 2;
 		c.gridy = 2;
 		c.gridwidth = 1;
-		c.anchor = GridBagConstraints.EAST;
-		panel1.add(new JLabel("   Es tu nota"), c);
+		c.anchor = GridBagConstraints.WEST;
+		panel1.add(new JLabel("Nota elegida"), c);
 		
 		
 		jlNota = new JLabel();
 		c.gridx = 2;
 		c.gridy = 2;
-		c.anchor = GridBagConstraints.WEST;
+		c.anchor = GridBagConstraints.CENTER;
 		panel1.add(jlNota, c);
 		
 		// Se introduce la fecha de la evaluación
@@ -205,13 +205,13 @@ public class PanelGestionValoracionMasiva extends JPanel {
 		c.gridx = 1;
 		c.gridy = 5;
 		c.fill = GridBagConstraints.BOTH;
-		c.insets = new Insets(5, 5, 5, 5);
+		c.insets = new Insets(2, 2, 2, 2);
 		c.anchor = GridBagConstraints.CENTER;
 		panel1.add(panelListas(), c);
 		
 		
         // Añadir botón de gurdar
-		c.gridx = 1;
+		c.gridx = 2;
 		c.gridy = 6;
 		c.insets = new Insets(3, 3, 3, 3);
 		c.anchor = GridBagConstraints.CENTER;
@@ -241,15 +241,52 @@ public class PanelGestionValoracionMasiva extends JPanel {
 		c.anchor = GridBagConstraints.CENTER;
 		panel.add(jbtPasarADerechaUno, c);
 		
+		jbtPasarADerechaUno.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int indiceAlumnosSeleccionados[] = jlistAlumnosDisponibles.getSelectedIndices();
+				for (int i = indiceAlumnosSeleccionados.length - 1; i > -1; i--) {
+					Estudiante est = listModelAlumnosDisponibles.elementAt(indiceAlumnosSeleccionados[i]);
+					listModelAlumnosSeleccionados.addElement(est);
+					listModelAlumnosDisponibles.removeElement(est);
+				}
+				
+			}
+		});
+		
 		c.gridwidth = 1;
 		c.gridx = 0;
 		c.gridy = 1;
 		panel.add(jbtPasarADerechaTodos, c);
 		
+		jbtPasarADerechaTodos.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
+		
 		c.gridwidth = 1;
 		c.gridx = 0;
 		c.gridy = 2;
 		panel.add(jbtPasarAIzquierdaUno, c);
+		
+		jbtPasarAIzquierdaUno.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int indiceAlumnosDisponibles[] = jlistAlumnosSeleccionados.getSelectedIndices();
+				for (int i = indiceAlumnosDisponibles.length - 1; i > -1; i--) {
+					Estudiante est = listModelAlumnosSeleccionados.elementAt(indiceAlumnosDisponibles[i]);
+					listModelAlumnosDisponibles.addElement(est);
+					listModelAlumnosSeleccionados.removeElement(est);
+				}
+				
+			}
+		});
 		
 		c.gridwidth = 1;
 		c.gridx = 0;
