@@ -254,6 +254,7 @@ public class PanelGestionValoracionMasiva extends JPanel {
 				}
 				
 			}
+			
 		});
 		
 		
